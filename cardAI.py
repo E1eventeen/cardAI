@@ -94,12 +94,9 @@ def image(dat, hasImage = True, output = "output"):
         cardArt = Image.open("Van.gogh.paintings/" + random.choice(os.listdir("Van.gogh.paintings/")))
     
     cardArt = cardArt.resize((808, 593), Image.LANCZOS)
-    #cardArt = cardArt.crop((0, 28, 808, 780))
-    #cardArt.save("cardArt.png")
-    #alteredArt = Image.open("cardArt.png")
     img.paste(cardArt, (84, 163))
     
     img.save(str(output) + '.png')
     return img
 
-image(gptConnect.getMagicCard(input("Describe your magic card: ")), hasImage = False)
+#image(gptConnect.getMagicCard(input("Describe your magic card: ")), hasImage = False)
