@@ -27,7 +27,7 @@ Before you can use this project, you'll need the following:
 
 3. Set up your OpenAI API credentials by following the instructions provided by OpenAI.
 
-4. Replace the placeholder API keys in the `gptConnect.py` script with your actual credentials.
+4. Replace the placeholder API key in the `apiKey.txt` file with your actual credentials.
 
 ## Usage:
 
