@@ -26,6 +26,7 @@ query = """Generate a magic the gathering card in the following JSON format: {
 }
 
 The card should have an appropriate mana cost relative to its strengths, and vice versa.
+If the card is a land, it should have a mana cost of 0.
 The card should follow the following description, and have at least one ability or keyword, and require at least 1 mana: 
 """
 
