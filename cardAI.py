@@ -31,7 +31,7 @@ def image(dat, hasImage = True, output = "output"):
         dat["toughness"] = 1
     if not "imageDescription" in dat:
         dat["imageDescription"] = "Abstract Art"
-    if not "manaCost" in dat:
+    if not "manaCost" in dat or dat["typeLine"] == "Land":
         dat["manaCost"] = {
         "red": 0,
         "blue": 0,
@@ -40,8 +40,9 @@ def image(dat, hasImage = True, output = "output"):
         "white": 0,
         "colorless": 0
     }
-        
-    img = Image.open("template.png")
+
+    tempColor = random.randint(1, 10)    
+    img = Image.open("templates/" + str(tempColor) + ".png")
     draw = ImageDraw.Draw(img)
     #print(dat)
     #Write Card Name
@@ -84,23 +85,13 @@ def image(dat, hasImage = True, output = "output"):
     line = '"' + dat["flavorText"] + '"'
     fontBody = ImageFont.truetype("comici.ttf", 24)
     while True:
-        # Find the last space character within TEXT_WIDTH
-        last_space = line.rfind(' ', 0, TEXT_WIDTH)
-        
-        if last_space == -1:
-            # No space found within TEXT_WIDTH, break at TEXT_WIDTH
-            break
-        
-        # Draw text up to the last space
-        draw.text((104, cursorY), line[:last_space], (0, 0, 0), font=fontBody)
-        
-        # Update cursorY
         cursorY += 25
-        
-        # Remove the drawn portion (including the space) from the line
+        last_space = line.rfind(' ', 0, TEXT_WIDTH)
+        if last_space == -1 or len(line) <= TEXT_WIDTH:
+            break
+        draw.text((104, cursorY), line[:last_space], (0, 0, 0), font=fontBody)
         line = line[last_space + 1:]
-
-    # Draw the remaining part of the line
+        
     if line:
         draw.text((104, cursorY), line, (0, 0, 0), font=fontBody)
 
@@ -142,7 +133,9 @@ def image(dat, hasImage = True, output = "output"):
     #cardArt.save("cardArt.png")
     #alteredArt = Image.open("cardArt.png")
     img.paste(cardArt, (84, 163))
-    
+    cardArt.close()
+    if hasImage:
+        os.remove("cardArt.png")
     img.save(str(output) + '.png')
     return img
 
