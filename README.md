@@ -1,7 +1,7 @@
 # Project Name: CardAI - Magic The Gathering Card Generator
 
 ## Description:
-CardAI is a project that leverages OpenAI's cutting-edge technologies to generate Magic The Gathering (MTG) cards. It consists of two main scripts: `cardAI.py` and `gptConnect.py`. `cardAI.py` is responsible for creating MTG card images based on provided data, while `gptConnect.py` connects to OpenAI's API to enhance the card generation process.
+CardAI is a project that leverages OpenAI's cutting-edge technologies to generate Magic The Gathering (MTG) cards. It consists of two main scripts: `cardAI.py` and `gptConnect.py`. `cardAI.py` is responsible for creating MTG card images based on provided data, while `gptConnect.py` connects to OpenAI's API to enhance the card generation process. `createDeck.py` can be used to generate a series of cards from a text text document of prompts.
 
 <img src="example.png" alt="Example Image" width="242" height="338">
 
