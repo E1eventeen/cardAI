@@ -3,7 +3,7 @@
 ## Description:
 CardAI is a project that leverages OpenAI's cutting-edge technologies to generate Magic The Gathering (MTG) cards. It consists of two main scripts: `cardAI.py` and `gptConnect.py`. `cardAI.py` is responsible for creating MTG card images based on provided data, while `gptConnect.py` connects to OpenAI's API to enhance the card generation process. `createDeck.py` can be used to generate a series of cards from a text text document of prompts.
 
-<img src="example.png" alt="Example Image" width="242" height="338">
+<img src="Examples/Internet User E1eventeen.png" alt="Example Card" width="242" height="338">
 
 _Example card, generated with prompt "3 Black Mana Card, GitHub User"_
 
@@ -64,27 +64,11 @@ The `gptConnect.py` script connects to OpenAI's API and provides the following f
 ## Example Usage:
 Here's an example of how to use the CardAI project:
 
-```python
-from cardAI import image
-from gptConnect import getMagicCard, imageGPT
+1. Run GUI.py
+2. Select "Text Prompt" or "Deck Prompt"
+3. Insert a prompt and choose the output destination
+4. Select "Use AI Art", if custom art is wanted. Note that custom art is much more expensive with OpenAI's API.
+5. Select "Generate".
 
-# Generate a Magic The Gathering card image with custom data
-card_data = {
-    "name": "Card Name",
-    "type": "Creature - Beast",
-    "power": "4",
-    "toughness": "4",
-    "flavor_text": "This is an example card.",
-}
-
-image(card_data, hasImage=True, output="custom_card.png")
-
-# Generate a Magic The Gathering card using a description
-card_description = "A powerful wizard with magical abilities."
-generated_card = getMagicCard(card_description)
-print(generated_card)
-
-# Generate a DALL-E image based on a prompt
-image_url = imageGPT("fantasy landscape")
-print(f"DALL-E generated image URL: {image_url}")
-```
+<img src="Examples/GUI1.png" alt="Example Image">
+<img src="Examples/GUI2.png" alt="Example Image">
