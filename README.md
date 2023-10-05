@@ -33,6 +33,20 @@ Before you can use this project, you'll need the following:
 
 4. Replace the placeholder API key in the `apiKey.txt` file with your actual credentials.
 
+## GUI Usage:
+Here's an example of how to use the CardAI project:
+
+1. Run GUI.py
+2. Select "Card Prompt" or "Deck Prompt"
+3. Insert a prompt and choose the output destination
+4. Select "Use AI Art", if custom art is wanted. Note that custom art is much more expensive with OpenAI's API.
+5. Select "Generate".
+
+<p float="left">
+   <img src="Examples/GUI1.PNG" alt="Text Prompt Page" style="width:25%">
+   <img src="Examples/GUI2.PNG" alt="Deck Prompt Page" style="width:25%">
+</p>
+
 ## Usage:
 
 ### cardAI.py
@@ -60,15 +74,3 @@ The `gptConnect.py` script connects to OpenAI's API and provides the following f
 - Parameters:
   - `prompt`: The prompt for generating the image.
 - Returns: The URL of the DALL-E-generated image.
-
-## Example Usage:
-Here's an example of how to use the CardAI project:
-
-1. Run GUI.py
-2. Select "Text Prompt" or "Deck Prompt"
-3. Insert a prompt and choose the output destination
-4. Select "Use AI Art", if custom art is wanted. Note that custom art is much more expensive with OpenAI's API.
-5. Select "Generate".
-
-<img src="Examples/GUI1.png" alt="Example Image">
-<img src="Examples/GUI2.png" alt="Example Image">
