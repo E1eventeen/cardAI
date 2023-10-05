@@ -33,19 +33,18 @@ def makeImage():
     generating = True
     if choice.get() == 0:
         p_bar.start(130 + 130 * v_aiImage.get())
-        cardAI.image(gptConnect.getMagicCard(e_prompt.get()), hasImage = bool(v_aiImage.get()), output = e_fileName.get())
+        cardAI.image(gptConnect.getMagicCard(e_prompt.get()), hasImage = bool(v_aiImage.get()), output = e_fileName.get().replace(".png","").replace(".jpg",""))
     elif choice.get() == 1:
         #print(file_path)
         #print(s_deck.get("1.0", END))
         prompts = s_deck.get("1.0", END).split("\n")[:-1]
         #print(len(prompts))
         i = 0
-        for prompt in prompts:
+        for i in range(len(prompts)):
             try:
                 p_bar["value"] = 100 * (1.0 * i / len(prompts))
-                i += 1
                 #print("Generating " + prompt)
-                cardAI.image(gptConnect.getMagicCard(prompt), hasImage = bool(v_aiImage.get()), output = file_path + "/" + prompt.replace("/", "-"))
+                cardAI.image(gptConnect.getMagicCard("Name - " + prompts[i]), hasImage = bool(v_aiImage.get()), output = file_path + "/" + str(i) + " - " + prompts[i].replace("/", "-").replace("\\","-"))
             except Exception as error:
                 print(error)
                 i -= 1
@@ -76,7 +75,7 @@ p_bar = ttk.Progressbar(root, mode = "determinate", length = 300)
 
 #Radio Button Prompts
 choice = IntVar()
-rb_Prompt = Radiobutton(radioframe_prompt, command = select, variable = choice, value = 0, text = "Text Prompt")
+rb_Prompt = Radiobutton(radioframe_prompt, command = select, variable = choice, value = 0, text = "Card Prompt")
 rb_DeckPaste = Radiobutton(radioframe_prompt, command = select, variable = choice, value = 1, text = "Deck Prompt")
 rb_Prompt.grid(row = 0, column = 0)
 rb_DeckPaste.grid(row = 0, column = 1)

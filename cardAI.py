@@ -46,8 +46,13 @@ def image(dat, hasImage = True, output = "output"):
     draw = ImageDraw.Draw(img)
     #print(dat)
     #Write Card Name
-    fontName = ImageFont.truetype("comicbd.ttf", 42)
-    draw.text((96, 76),dat["name"],(0,0,0),font=fontName)
+    if len(dat["name"]) > 15:
+        size = 32
+        fontName = ImageFont.truetype("comicbd.ttf", size)
+        draw.text((96, 76 + (42 - size)),dat["name"],(0,0,0),font=fontName)
+    else:
+        fontName = ImageFont.truetype("comicbd.ttf", 42)
+        draw.text((96, 76),dat["name"],(0,0,0),font=fontName)
 
     #Write Card Type
     fontType = ImageFont.truetype("comic.ttf", 42)
@@ -95,29 +100,44 @@ def image(dat, hasImage = True, output = "output"):
     if line:
         draw.text((104, cursorY), line, (0, 0, 0), font=fontBody)
 
-            
-
     #Paste Mana Icons
 
     cursorX = 835
+    cx = 40
+    cy = 90
+
     colors = ["green","red","black","blue","white"]
+    totalMana = 0
+    colorLess = dat["manaCost"]["colorless"]
+    if colorLess > 0:
+        totalMana = 1
+    for color in colors:
+        totalMana += dat["manaCost"][color]
+    if totalMana > 5:
+        cx = 30
+        cy = 95
+    
+    mask = Image.new('L', (cx, cx), 0)
+    mask_draw = ImageDraw.Draw(mask)
+    mask_draw.ellipse((0, 0, cx, cx), fill=255)
+    
     for color in colors:
         try:
             icon = Image.open("icons/" + color + ".png")
-            icon = icon.resize((40, 40), Image.LANCZOS)
+            icon = icon.resize((cx, cx), Image.LANCZOS)
             for i in range(dat["manaCost"][color]):
-                img.paste(icon, (cursorX, 90))
-                cursorX -= 50
+                img.paste(icon, (cursorX, cy), mask)
+                cursorX -= round(cx * 1.25)
         except:
             continue
 
-    colorLess = dat["manaCost"]["colorless"]
+
     if colorLess > 15:
         colorLess = 15
     if colorLess > 0:
         icon = Image.open("icons/" + str(colorLess) + ".png")
-        icon = icon.resize((40, 40), Image.LANCZOS)
-        img.paste(icon, (cursorX, 90))
+        icon = icon.resize((cx, cx), Image.LANCZOS)
+        img.paste(icon, (cursorX, cy), mask)
         
 
     #Paste Image
@@ -133,6 +153,7 @@ def image(dat, hasImage = True, output = "output"):
     #cardArt.save("cardArt.png")
     #alteredArt = Image.open("cardArt.png")
     img.paste(cardArt, (84, 163))
+    
     cardArt.close()
     if hasImage:
         os.remove("cardArt.png")
