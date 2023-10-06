@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import font, ttk, messagebox, filedialog
 from tkinter.scrolledtext import ScrolledText
 import cardAI, gptConnect, time, threading
-
+import subprocess
 
 root = Tk()
 root.title("CardAI")
@@ -167,7 +167,32 @@ b_generate = Button(frame_bottom, text = "Generate", command = generate, state=D
 b_generate.grid(row = 4, column = 0)
 
 
+#Help Button=================================================
 
+def openAPI():
+    subprocess.Popen(["notepad.exe", "apiKey.txt"])
+
+def openHelp():
+    helpBox = Toplevel(root)
+
+    helpText = """Welcome to CardAI!
+
+This program uses ChatGPT and Dall-e to generate magic the gathering cards.
+In order for this to function, you need to insert your own API key into the file below.
+You can generate your own API key at https://platform.openai.com/account/api-keys.
+
+As an estimate, each card costs 16¢ with and 0.1¢ without images.
+A deck on average should cost about $1.
+    """
+    l_helpText = Label(helpBox, text = helpText)
+    l_helpText.grid(row = 0, column = 0)
+
+    b_apiOpen = Button(helpBox, text = "Open API File", command = openAPI)
+    b_apiOpen.grid(row = 1, column = 0)
+    
+
+b_help = Button(root, text = "?", command = openHelp)
+b_help.place(relx=1, rely=0, anchor='ne')
 
 
 
